@@ -54,3 +54,23 @@ BEGIN;
 	/* Shows the changes */
 	SELECT * FROM animals;
 COMMIT;
+
+/* Filtering */
+/* Total number of animals */
+SELECT COUNT(*) FROM animals;
+
+/*Number of animals which never tried to escape */
+SELECT COUNT(*) FROM animals WHERE escape_attempts = 0;
+
+/* Average weight of animals */
+SELECT AVG(weight_kg) FROM animals;
+
+/* Frequency of escape attempts grouped by neutered */
+SELECT neutered, AVG(escape_attempts) FROM animals GROUP BY neutered; 
+
+/*Minimum and maximum weight grouped by species */
+SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
+
+/* Average number of escape attempts per species of those born between 1990 and 2000 */
+SELECT species, AVG(escape_attempts) FROM animals WHERE date_part('year', date_of_birth) 
+	BETWEEN 1990 AND 2000 GROUP BY species;
