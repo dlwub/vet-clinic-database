@@ -36,4 +36,26 @@ UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Bob') WH
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Melody Pond') WHERE name = 'Charmander' OR name = 'Squirtle' OR name = 'Blossom';
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Dean Winchester') WHERE name = 'Angemon' OR name = 'Boarmon';
 
+/* Insert data to vets table */
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('William Tatcher', 45, DATE '2000-04-23');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Maisy Smith', 26, DATE '2019-01-17');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Stephanie Mendez', 64, DATE '1981-05-04');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Jack Harkness', 38, DATE '2008-06-08');
+
+/* Insert data to specializations table */
+INSERT INTO specializations (vet_id, species_id) 
+	VALUES ((SELECT id FROM vets WHERE name = 'William Tatcher'),
+	(SELECT id FROM species WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, species_id) 
+	VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'),
+	(SELECT id FROM species WHERE name = 'Digimon'));
+
+INSERT INTO specializations (vet_id, species_id) 
+	VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'),
+	(SELECT id FROM species WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, species_id) 
+	VALUES ((SELECT id FROM vets WHERE name = 'Jack Harkness'),
+	(SELECT id FROM species WHERE name = 'Digimon'));
 
