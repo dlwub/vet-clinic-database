@@ -33,3 +33,29 @@ ALTER TABLE animals DROP COLUMN species;
 /* Add foreign keys */
 ALTER TABLE animals ADD COLUMN species_id INTEGER REFERENCES species(id);
 ALTER TABLE animals ADD COLUMN owner_id INTEGER REFERENCES owners(id);
+
+/*Create vets table */
+CREATE SEQUENCE vets_serial AS integer START 1 OWNED BY vets.id;
+CREATE TABLE vets (
+    id SERIAL PRIMARY KEY,
+    name varchar(100),
+    age INT,
+    date_of_graduation DATE,
+    );
+
+/*Create specializations table */
+CREATE TABLE specializations (
+    vet_id INT,
+    species_id INT,
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (species_id) REFERENCES species(id),
+);
+
+/*Create visits table */
+CREATE TABLE visits (
+    animal_id INT,
+    vet_id INT,
+    date_of_visit DATE,
+    FOREIGN KEY (animal_id) REFERENCES animals(id),
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+);
