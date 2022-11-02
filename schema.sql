@@ -18,6 +18,7 @@ CREATE TABLE owners (
     full_name varchar(100),
     age INT,
 );
+
 /*Create species table */
 CREATE SEQUENCE species_serial AS integer START 1 OWNED BY species.id;
 CREATE TABLE species (
@@ -28,8 +29,10 @@ CREATE TABLE species (
 /* Modify animals table */
 CREATE SEQUENCE animals_serial AS integer START 1 OWNED BY animals.id;
 ALTER TABLE animals ALTER COLUMN id SET DEFAULT nextval('animals_serial');
+
 /* Drop species column */
 ALTER TABLE animals DROP COLUMN species;
+
 /* Add foreign keys */
 ALTER TABLE animals ADD COLUMN species_id INTEGER REFERENCES species(id);
 ALTER TABLE animals ADD COLUMN owner_id INTEGER REFERENCES owners(id);
@@ -66,3 +69,4 @@ ALTER TABLE owners ADD COLUMN email VARCHAR(120);
 /*Creating indexes */ 
 CREATE INDEX visits_asc ON visits (animal_id, vet_id); 
 CREATE INDEX email_desc ON owners (email desc); 
+
