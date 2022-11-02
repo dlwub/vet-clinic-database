@@ -62,4 +62,3 @@ CREATE TABLE visits (
 
 /* Improving performance */
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
-
